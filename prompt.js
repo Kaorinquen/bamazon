@@ -77,6 +77,16 @@ function idSearch() {
     ])
     .then(function(answer){
         var query = connection.query ("SELECT item_id FROM products WHERE ?");
-    
-    }
+        connection.query(query, {item_id: answer.item_id}, function(err, res){
+          if (err) throw err;
+          for (i = 0; i < res.length; i++){
+            console.log("Item Id: " + res[i].item_id + "|" + res[i].product_name + "|" + res[i].price + "|" + res[i].quantity);  
+          }
+
+        });
+    runSearch();
+    });
 }
+
+
+
